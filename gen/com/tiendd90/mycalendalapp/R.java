@@ -20,19 +20,23 @@ public final class R {
         public static final int activity_main_btnOpenFragment03=0x7f060004;
         public static final int activity_main_btnOpenFragment04=0x7f060005;
         public static final int activity_main_fragmentHolder=0x7f060001;
-        public static final int calendarView1=0x7f06000c;
+        public static final int calendarView1=0x7f060010;
+        public static final int daylist_lvTask=0x7f060007;
         public static final int daylist_tvDay=0x7f060006;
-        public static final int fragment02_btnEdit=0x7f060011;
-        public static final int fragment02_btnToday=0x7f060010;
-        public static final int fragment02_lvDays=0x7f060012;
-        public static final int imageView1=0x7f060007;
-        public static final int imageView2=0x7f060009;
-        public static final int layout_fragment01_btnEdit=0x7f06000b;
-        public static final int layout_fragment01_btnToday=0x7f06000a;
-        public static final int textView1=0x7f060008;
-        public static final int textView2=0x7f06000d;
-        public static final int textView3=0x7f06000e;
-        public static final int textView4=0x7f06000f;
+        public static final int fragment02_btnEdit=0x7f060015;
+        public static final int fragment02_btnToday=0x7f060014;
+        public static final int fragment02_lvDays=0x7f060016;
+        public static final int layout_fragment01_btnEdit=0x7f06000f;
+        public static final int layout_fragment01_btnToday=0x7f06000d;
+        public static final int taskList_ivFirst=0x7f060008;
+        public static final int taskList_ivLast=0x7f06000c;
+        public static final int taskList_tvStr1=0x7f06000a;
+        public static final int taskList_tvStr2=0x7f06000b;
+        public static final int taskList_tvTime=0x7f060009;
+        public static final int textView1=0x7f06000e;
+        public static final int textView2=0x7f060011;
+        public static final int textView3=0x7f060012;
+        public static final int textView4=0x7f060013;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;

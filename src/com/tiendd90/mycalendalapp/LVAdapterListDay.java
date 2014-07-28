@@ -12,29 +12,32 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 
 
-public class LVAdapterListDay extends ArrayAdapter<String>
+public class LVAdapterListDay extends BaseAdapter
 {
 
-	private ArrayList<String> data;
+	private ArrayList<DayTask> data;
 	private LayoutInflater inflater;
+	private Activity fatherActivity;
+	private int resource;
 	private ViewHolder holder;
-	
-	
-	
-	public LVAdapterListDay(Activity context, int resource, ArrayList<String> objects)
-	{
-		super(context, resource, objects);
-		// TODO Auto-generated constructor stub
-		
-		data = objects;
-		inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-	}
 
+	
+	
+	public LVAdapterListDay(Activity context, int resource, ArrayList<DayTask> objects)
+	{
+		this.fatherActivity = context;
+		this.data = objects;
+		this.resource = resource;
+		this.inflater = (LayoutInflater) context.getSystemService(
+										Context.LAYOUT_INFLATER_SERVICE);
+	}
+	
 	
 	
 	@SuppressLint("InflateParams") @Override
@@ -46,15 +49,16 @@ public class LVAdapterListDay extends ArrayAdapter<String>
 		
 		if(convertView==null)
 		{
-			holder = new ViewHolder();
 			
-			//v = inflater.inflate(R.layout.custom_daylist, null);
-			v = inflater.inflate(android.R.layout.simple_list_item_1, null);
+			holder = new ViewHolder();
+
+
+			v = inflater.inflate(this.resource, null);
 			
 			// textview
 			holder.tvDay = (TextView) v.findViewById(R.id.daylist_tvDay);
 			// listview
-			//
+			holder.lvTasks = (ListView) v.findViewById(R.id.daylist_lvTask);
 			
 			v.setTag(holder);
 			
@@ -65,18 +69,55 @@ public class LVAdapterListDay extends ArrayAdapter<String>
 		}
 		
 		
-		//DayTask dt = data.get(position);
+		DayTask dt = data.get(position);
 		
-		Log.e("myAdapter", data.get(position));
-		
-		holder.tvDay.setText(data.get(position).toString());
-		//holder.lvTasks
+		for(int i=0; i<dt.getTasks().size(); ++i)
+			Log.e("test", dt.getTasks().get(i).getTimeStart());
+
+		holder.tvDay.setText(dt.getDay());
+		LVAdapterListTask dayAdapter = new LVAdapterListTask(
+											fatherActivity, 
+											R.layout.custom_tasklist, 
+											dt.getTasks());
+		holder.lvTasks.setAdapter(dayAdapter);
+		dayAdapter.notifyDataSetChanged();
 		
 		
 		return v;
 	}
 	
+
 	
+
+	@Override
+	public int getCount()
+	{
+		// TODO Auto-generated method stub
+		return data.size();
+	}
+
+
+
+
+
+	@Override
+	public Object getItem(int position)
+	{
+		// TODO Auto-generated method stub
+		return data.get(position);
+	}
+
+
+
+
+
+	@Override
+	public long getItemId(int position)
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 	
 	
 	
@@ -85,5 +126,4 @@ public class LVAdapterListDay extends ArrayAdapter<String>
 		TextView tvDay;
 		ListView lvTasks;
 	}
-
 }

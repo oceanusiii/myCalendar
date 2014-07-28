@@ -63,10 +63,12 @@ public class MainActivity extends Activity
     	
     	
     	// replace fragment in layout
-    	FragmentManager fm = getFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
+    	//FragmentManager fm = getFragmentManager();
+        //FragmentTransaction ft = fm.beginTransaction();
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
         
         ft.replace(R.id.activity_main_fragmentHolder, f);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);	//??
         ft.addToBackStack(null);
         ft.commit();
     

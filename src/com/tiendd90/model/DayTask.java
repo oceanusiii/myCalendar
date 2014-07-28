@@ -2,10 +2,14 @@ package com.tiendd90.model;
 
 import java.util.ArrayList;
 
+
 public class DayTask
 {
+	
 	private String day;
-	private ArrayList<String> tasks;
+	private ArrayList<Task> tasks;
+	
+	
 	
 	
 	public DayTask()
@@ -13,20 +17,16 @@ public class DayTask
 		
 	}
 
-
-	public void addTask(String task)
-	{
-		if(task!=null)
-		{
-			tasks.add(task);
-		}
-	}
+	
+	
 	
 	public String getDay()
 	{
 		return day;
 	}
 
+	
+	
 
 	public void setDay(String day)
 	{
@@ -34,16 +34,21 @@ public class DayTask
 	}
 
 
-	public ArrayList<String> getTasks()
+
+
+	public ArrayList<Task> getTasks()
 	{
 		return tasks;
 	}
 
 
-	public void setTasks(ArrayList<String> tasks)
+
+
+	public void setTasks(ArrayList<Task> tasks)
 	{
 		this.tasks = tasks;
 	}
+
 	
 	
 }
