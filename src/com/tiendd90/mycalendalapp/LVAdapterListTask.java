@@ -1,36 +1,39 @@
 package com.tiendd90.mycalendalapp;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
-import com.tiendd90.model.Task;
+import java.util.Calendar;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-
+import com.tiendd90.model.CTask;
+import com.tiendd90.model.Plan;
 
 
 public class LVAdapterListTask extends BaseAdapter
 {
-	
-	
-	private ArrayList<Task> data;
+	private ArrayList<CTask> data;
 	private LayoutInflater inflater;
 	private int resource;
 	private ViewHolder holder;
 	
 	
 	
-	public LVAdapterListTask(Activity context, int resource, ArrayList<Task> objects)
+	public LVAdapterListTask(Activity context, 
+				int resource, ArrayList<CTask> objects)
 	{
 		this.resource = resource;
 		this.data = objects;
-		this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		this.inflater = (LayoutInflater) 
+				context.getSystemService(
+						Context.LAYOUT_INFLATER_SERVICE);
 	}
 	
 	
@@ -39,7 +42,6 @@ public class LVAdapterListTask extends BaseAdapter
 	@Override
 	public int getCount()
 	{
-		// TODO Auto-generated method stub
 		return data.size();
 	}
 
@@ -58,7 +60,6 @@ public class LVAdapterListTask extends BaseAdapter
 	@Override
 	public long getItemId(int position)
 	{
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
@@ -68,7 +69,7 @@ public class LVAdapterListTask extends BaseAdapter
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent)
 	{
-		// TODO Auto-generated method stub
+
 		View v = convertView;
 		
 		if(convertView==null)
@@ -80,11 +81,14 @@ public class LVAdapterListTask extends BaseAdapter
 			v = inflater.inflate(this.resource, null);
 			
 			// textview time
-			holder.tvTime = (TextView) v.findViewById(R.id.taskList_tvTime);
+			holder.tvTime = (TextView) v.findViewById(
+									R.id.taskList_tvTime);
 			// textview string1
-			holder.tvStr1 = (TextView) v.findViewById(R.id.taskList_tvStr1);
+			holder.tvTitle = (TextView) v.findViewById(
+									R.id.taskList_tvStr1);
 			// textview string2
-			holder.tvStr2 = (TextView) v.findViewById(R.id.taskList_tvStr2);
+			holder.tvContent = (TextView) v.findViewById(
+									R.id.taskList_tvStr2);
 			
 			v.setTag(holder);
 			
@@ -95,23 +99,39 @@ public class LVAdapterListTask extends BaseAdapter
 		}
 		
 		
-		Task t = data.get(position);
+		CTask t = data.get(position);
 		
-		// show data
-		holder.tvTime.setText(t.getTimeStart() + " ~ " + t.getTimeEnd());
-		holder.tvStr1.setText(t.getStr1());
-		holder.tvStr2.setText(t.getStr2());
+		
+		if(t.getType().equals("Plan"))
+		{
+			Plan p = (Plan) t;
+			Calendar c = Calendar.getInstance();
+			java.text.DateFormat format = new SimpleDateFormat("HH:mm");
+			c.setTimeInMillis(Long.parseLong(p.getStartTime()));
+			String startTime = format.format(c.getTime());
+			c.setTimeInMillis(Long.parseLong(p.getEndTime()));
+			String endTime = format.format(c.getTime());
+			// show data
+			holder.tvTime.setText(startTime + "~" + endTime);
+			holder.tvTitle.setText(p.getTitle());
+			holder.tvContent.setText(p.getContent());
+		}
 		
 		
 		return v;
 	}
 
 	
+	public ArrayList<CTask> getData()
+	{
+		return data;
+	}
+	
 	
 	class ViewHolder
 	{
 		TextView tvTime;
-		TextView tvStr1;
-		TextView tvStr2;
+		TextView tvTitle;
+		TextView tvContent;
 	}
 }

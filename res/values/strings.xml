@@ -3,5 +3,8 @@
 
     <string name="app_name">MyCalendalApp</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_plan_detail">Plan</string>
+    <string name="title_activity_chose_pattern">ChosePatternActivity</string>
+    <string name="title_activity_shift_detail">ShiftDetailActivity</string>
 
 </resources>

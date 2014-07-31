@@ -2,17 +2,21 @@ package com.tiendd90.mycalendalapp;
 
 import java.util.ArrayList;
 
-import com.tiendd90.model.DayTask;
-import com.tiendd90.model.Task;
+import com.tiendd90.model.Day;
+import com.tiendd90.model.Plan;
+
+
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.TextView;
 
 
 
@@ -21,13 +25,14 @@ public class Fragment02 extends Fragment
 {
 
 	private LVAdapterListDay myAdapter;
-	//private ArrayAdapter<String> myAdapter;
-	private ArrayList<DayTask> data;
+	private ArrayList<String> data;
+	private Day day;
+	private TextView tvDateTitle;
 	
 	
 	public Fragment02()
 	{
-		data = new ArrayList<DayTask>();
+		data = new ArrayList<String>();
 	}
 	
 	
@@ -36,6 +41,13 @@ public class Fragment02 extends Fragment
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
+		
+		
+		Intent i = getActivity().getIntent();
+		day = (Day) i.getBundleExtra("data").
+							getSerializable("day");
+		
+		
 	}
 
 	
@@ -53,31 +65,55 @@ public class Fragment02 extends Fragment
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState)
 	{
-		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
 		
-		
+		//changeDateTitle();
 		// fake data
-		for(int i=0; i<31; ++i)
+		// add day into list
+		int m = Integer.parseInt(day.getM());
+		int y = Integer.parseInt(day.getY());
+		int d = 0;
+		switch(m)
 		{
-			DayTask d = new DayTask();
-			d.setDay(""+(i+1));
-			ArrayList<Task> tmpTask = new ArrayList<Task>();
-			for(int j=0; j<5; ++j)
-			{
-				tmpTask.add(new Task("0" + j + ":00", "10:00", "string "+j, "String 2"));
-			}
-			d.setTasks(tmpTask);
-			data.add(d);
+		case 0:
+		case 2:
+		case 4:
+		case 6:
+		case 7:
+		case 9:
+		case 11:
+			d = 31;
+			break;
+		case 3:
+		case 5:
+		case 8:
+		case 10:
+			d = 30;
+			break;
+		case 1:
+			if(y%4==0)
+				d = 29;
+			else
+				d = 28;
+			break;
+		}
+		
+		
+		for(int i=0; i<d; ++i)
+		{
+			data.add(i+1+"");
 		}
 
 
 		// get ListView listDay
-		ListView myLv = (ListView) getActivity().findViewById(R.id.fragment02_lvDays);
+		ListView myLv = (ListView) getActivity().findViewById(
+										R.id.fragment02_lvDays);
 
 		
+		
 		// create custom listDay adapter
-		myAdapter = new LVAdapterListDay(getActivity(), R.layout.custom_daylist, data);
+		myAdapter = new LVAdapterListDay(getActivity(), 
+							R.layout.custom_daylist, data, day);
 		
 		
 		
@@ -87,8 +123,38 @@ public class Fragment02 extends Fragment
 		
 		myAdapter.notifyDataSetChanged();
 		
+		
+		myLv.setOnItemClickListener(new OnItemClickListener()
+		{
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0,
+					View arg1, int arg2, long arg3)
+			{
+				Intent i = new Intent(getActivity(), PlanDetailActivity.class);
+				
+				Bundle b = new Bundle();
+				b.putSerializable("day", day);
+				b.putSerializable("plan", new Plan());
+				
+				i.putExtra("data", b);
+				startActivity(i);
+			}
+		});
+		
+		
+		// get title TextView
+		tvDateTitle = (TextView) getActivity().findViewById(
+									R.id.fragment02_tvDateTitle);
+		// change date title
+		changeDateTitle();
 	}
 
 	
-
+	
+	private void changeDateTitle()
+	{
+		tvDateTitle.setText(day.getY() + "/" 
+					+ (Integer.parseInt(day.getM()) + 1));
+	}
 }

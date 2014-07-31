@@ -10,7 +10,7 @@
         android:id="@+id/activity_main_fragmentHolder"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="85"
+        android:layout_weight="90"
         android:gravity="center"
         android:background="#515151"
         android:orientation="vertical" >
@@ -19,7 +19,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="15" 
+        android:layout_weight="10" 
         android:orientation="horizontal"
         android:weightSum="8"
         android:background="#222222" >

@@ -19,12 +19,12 @@
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
 
-   
-
         <ListView
             android:id="@+id/daylist_lvTask"
             android:layout_width="0dp"
             android:layout_weight="8"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             android:layout_height="wrap_content" >
         </ListView>
 

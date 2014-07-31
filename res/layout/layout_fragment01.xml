@@ -15,7 +15,7 @@
         android:weightSum="10" >
 
         <ImageButton
-            android:id="@+id/layout_fragment01_btnToday"
+            android:id="@+id/fragment01_btnToday"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
@@ -43,7 +43,7 @@
         
 
         <ImageButton
-            android:id="@+id/layout_fragment01_btnEdit"
+            android:id="@+id/fragment01_btnEdit"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
@@ -108,15 +108,22 @@
                     android:text="info1" />
 
                 <TextView
-                    android:id="@+id/textView4"
+                    android:id="@+id/fragment01_tvCrePlan"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:gravity="center"
                     android:textColor="#ffffff"
-                    android:text="info2" />
+                    android:text="crePlan" />
 
             </LinearLayout>
+
+            <ListView
+                android:id="@+id/fragment01_lvPlan"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="8" >
+            </ListView>
 
         </LinearLayout>
 
