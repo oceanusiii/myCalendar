@@ -19,8 +19,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 
-
-
 public class Fragment02 extends Fragment
 {
 
@@ -42,12 +40,13 @@ public class Fragment02 extends Fragment
 	{
 		super.onCreate(savedInstanceState);
 		
-		
-		Intent i = getActivity().getIntent();
-		day = (Day) i.getBundleExtra("data").
-							getSerializable("day");
-		
-		
+		try
+		{
+		// get day from last fragment
+		day = (Day) getActivity().getIntent().
+				getBundleExtra("data").getSerializable("day");
+		}
+		catch(Exception ex) { day = new Day(); } 
 	}
 
 	
@@ -57,7 +56,8 @@ public class Fragment02 extends Fragment
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState)
 	{
-		return inflater.inflate(R.layout.layout_fragment02, container, false);
+		return inflater.inflate(
+				R.layout.layout_fragment02, container, false);
 	}
 
 
@@ -119,7 +119,6 @@ public class Fragment02 extends Fragment
 		
 		// set adapter to listview
 		myLv.setAdapter(myAdapter);
-		
 		
 		myAdapter.notifyDataSetChanged();
 		

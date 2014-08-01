@@ -5,14 +5,12 @@ import java.util.ArrayList;
 import com.tiendd90.dataprovider.TblPlanTHelper;
 import com.tiendd90.model.CTask;
 import com.tiendd90.model.Day;
-import com.tiendd90.model.Plan;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

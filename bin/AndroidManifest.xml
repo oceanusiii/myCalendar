@@ -38,6 +38,10 @@
             android:name=".ShiftDetailActivity"
             android:label="@string/app_name" >
         </activity>
+        <activity
+            android:name=".ChoseIconActivity"
+            android:label="@string/app_name" android:theme="@android:style/Theme.DeviceDefault.Dialog">
+        </activity>
     </application>
 
 </manifest>

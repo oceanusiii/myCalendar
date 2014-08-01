@@ -20,7 +20,6 @@ import android.widget.ListView;
 public class ChosePatternActivity extends Activity
 {
 	
-	
 	private ArrayList<String> listPattern;
 	private ArrayList<String> listID;
 	private ArrayAdapter<String> myAdapter;
@@ -62,22 +61,20 @@ public class ChosePatternActivity extends Activity
 		// chose
 		lvPattern.setOnItemClickListener(new OnItemClickListener()
 		{
-
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id)
 			{
-				
 				Plan p = new Plan();
 				// get plan by ID
 				p = new TblPlanHelper(ChosePatternActivity.this).
 										getByID(listID.get(position));
 				
 				Bundle b = new Bundle();
-				b.putSerializable("patternChosed", p);
+				b.putSerializable("newPattern", p);
 				
 				Intent i = getIntent();
-				i.putExtra("patternChosed", b);
+				i.putExtra("data", b);
 				
 				setResult(PlanDetailActivity.RESULT_CODE_CHOSEPATTERN, i);
 				

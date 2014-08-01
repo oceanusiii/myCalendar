@@ -9,11 +9,11 @@ import com.tiendd90.dataprovider.TblPlanTHelper;
 import com.tiendd90.model.CTask;
 import com.tiendd90.model.Day;
 import com.tiendd90.model.Plan;
+import com.tiendd90.model.Shift;
 
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -22,6 +22,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.CalendarView;
 import android.widget.CalendarView.OnDateChangeListener;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -30,12 +31,10 @@ import android.widget.TextView;
 public class Fragment01 extends Fragment
 {
 
-	
 	private ArrayList<CTask> lstTask = new ArrayList<CTask>();
 	private TblPlanTHelper tblPlanT;
 	private Day day;
 	private LVAdapterListTask adapterTask;
-	
 	
 	
 	
@@ -47,9 +46,12 @@ public class Fragment01 extends Fragment
 		
 		tblPlanT = new TblPlanTHelper(getActivity());
 		
-		Bundle b = getActivity().getIntent().getBundleExtra("today");
-		day = (Day) b.getSerializable("today");
-		
+		try
+		{
+			Bundle b = getActivity().getIntent().getBundleExtra("data");
+			day = (Day) b.getSerializable("day");
+		}
+		catch(Exception ex) { day = new Day(); }
 	}
 
 	
@@ -70,24 +72,21 @@ public class Fragment01 extends Fragment
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState)
 	{
-		
-		
 		super.onActivityCreated(savedInstanceState);
-		
 		
 		// get ListView
 		ListView lvPlan = (ListView) getActivity().findViewById(
 											R.id.fragment01_lvPlan);
 		
 		// create adapter
-		adapterTask  = new LVAdapterListTask(
+		adapterTask = new LVAdapterListTask(
 					getActivity(), R.layout.custom_tasklist, lstTask);
 		
 		// set adapter for listview
 		lvPlan.setAdapter(adapterTask);
 		
 		// first, get tasks in today
-		loadAllTasksByDate(day);
+		//loadAllTasksByDate(day);
 		
 		// chose item
 		lvPlan.setOnItemClickListener(new OnItemClickListener()
@@ -103,7 +102,6 @@ public class Fragment01 extends Fragment
 					// Open planDetail Activity
 					startPlanDetailActivity(day, (Plan)t);
 				}
-				
 			}
 		});
 		
@@ -145,10 +143,38 @@ public class Fragment01 extends Fragment
 		});
 		
 		
+		// get image button create
+		ImageButton ibtnEdit = (ImageButton) getActivity().
+						findViewById(R.id.fragment01_btnEdit);
+		
+		
+		// set onClick
+		ibtnEdit.setOnClickListener(new OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				Intent i = new Intent(
+					getActivity(), ShiftDetailActivity.class);
+				
+				Bundle b = new Bundle();
+				b.putSerializable("shift", new Shift());
+				b.putSerializable("day", day);
+				
+				i.putExtra("data", b);
+				
+				startActivity(i);
+			}
+		});
+		
+		
+		// close
+		
+		
+		// show list
 	}
 
-
-
+	
 
 	@Override
 	public void onPause()
@@ -163,17 +189,31 @@ public class Fragment01 extends Fragment
 	}
 	
 	
-	
+
+	@Override
+	public void onResume()
+	{
+		loadAllTasksByDate(day);
+		super.onResume();
+	}
+
+
+
 	// open activity DetailPlan
 	// with data
 	private void startPlanDetailActivity(Day d, Plan p)
 	{
+		Day dt = d;
+		if(dt==null) dt = new Day();
+		Plan pt = p;
+		if(pt==null) pt = new Plan();
+		
 		Intent i = new Intent(getActivity(), 
 				PlanDetailActivity.class);
 		Bundle b = new Bundle();
 		
-		b.putSerializable("day", d);
-		b.putSerializable("plan", p);
+		b.putSerializable("day", dt);
+		b.putSerializable("plan", pt);
 		
 		i.putExtra("data", b);
 		
@@ -185,14 +225,18 @@ public class Fragment01 extends Fragment
 	// load all task by day
 	private void loadAllTasksByDate(Day d)
 	{
-		lstTask.clear();
-		// load Plan
-		lstTask.addAll(tblPlanT.getByDate(
-				d.getY()+d.getM()+d.getD()));
-		// load Shift
-		
-		// notification data change
-		adapterTask.notifyDataSetChanged();
+		if(d!=null)
+		{
+			lstTask.clear();
+			// load Plan
+			lstTask.addAll(tblPlanT.getByDate(
+					d.getY()+d.getM()+d.getD()));
+			//lstTask.addAll(tblPlanT.getAll());
+			// load Shift
+			
+			// notification data change
+			adapterTask.notifyDataSetChanged();
+		}
 	}
 	
 }

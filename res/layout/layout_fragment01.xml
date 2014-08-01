@@ -91,7 +91,7 @@
                     android:id="@+id/textView2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="6"
+                    android:layout_weight="4"
                     android:gravity="center"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -115,6 +115,22 @@
                     android:gravity="center"
                     android:textColor="#ffffff"
                     android:text="crePlan" />
+
+                <TextView
+                    android:id="@+id/fragment01_tvLstShift"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#ffffff"
+                    android:layout_weight="1"
+                    android:text="ol" />
+
+                <TextView
+                    android:id="@+id/fragment01_tvLstClose"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#ffffff"
+                    android:layout_weight="1"
+                    android:text="X" />
 
             </LinearLayout>
 

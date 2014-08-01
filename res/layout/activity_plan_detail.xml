@@ -21,7 +21,6 @@
             android:layout_weight="8"
             android:gravity="center"
             android:textColor="#ffffff"
-            android:text="Head"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <ImageButton
@@ -159,12 +158,12 @@
                     android:layout_weight="1"
                     android:text="Icon: " />
 
-                <ImageButton
-                    android:id="@+id/edit_plan_ibtnIcon"
+                <ImageView
+                    android:id="@+id/edit_plan_ivIcon"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/mothlycalendar_calendar_icon" />
+                    android:src="@drawable/ic_launcher" />
 
             </LinearLayout>
 
@@ -251,13 +250,12 @@
                     android:layout_weight="1"
                     android:text="Notification: " />
 
-                <ToggleButton
-                    android:id="@+id/edit_plan_tbtnNotification"
+                <Switch
+                    android:id="@+id/edit_plan_sbtnNotification"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:textOn="ON"
-                    android:textOff="OFF"
-                    android:layout_weight="1" />
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="" />
 
             </LinearLayout>
 
@@ -329,9 +327,10 @@
 
             <Button
                 android:id="@+id/edit_plan_btnAction"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="CREATE" />
+                android:visibility="invisible"
+                android:text="DELETE" />
 
         </LinearLayout>
 

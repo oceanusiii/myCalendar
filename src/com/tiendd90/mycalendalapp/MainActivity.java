@@ -2,6 +2,7 @@ package com.tiendd90.mycalendalapp;
 
 import java.util.Calendar;
 
+import com.tiendd90.dataprovider.DBConfig;
 import com.tiendd90.model.Day;
 
 import android.app.Activity;
@@ -24,7 +25,8 @@ public class MainActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        
+        // ??
+        new DBConfig(MainActivity.this);
         
         //
         Calendar calendar = Calendar.getInstance();
@@ -37,10 +39,10 @@ public class MainActivity extends Activity
         
         // put to bundle
         Bundle b = new Bundle();
-        b.putSerializable("today", d);
+        b.putSerializable("day", d);
         
         // put to intent
-        getIntent().putExtra("today", b);
+        getIntent().putExtra("data", b);
         
         
         

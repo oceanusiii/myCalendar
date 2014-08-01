@@ -6,5 +6,6 @@
     <string name="title_activity_plan_detail">Plan</string>
     <string name="title_activity_chose_pattern">ChosePatternActivity</string>
     <string name="title_activity_shift_detail">ShiftDetailActivity</string>
+    <string name="title_activity_chose_icon">ChoseIconActivity</string>
 
 </resources>

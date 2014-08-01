@@ -16,19 +16,18 @@ import android.app.TimePickerDialog;
 import android.app.TimePickerDialog.OnTimeSetListener;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.ToggleButton;
-
-
 
 
 public class PlanDetailActivity extends Activity
@@ -37,8 +36,10 @@ public class PlanDetailActivity extends Activity
 	private Day day = null;
 	private Plan plan = null;
 	// views
+	private Button btnExe;
 	private ImageButton ibtnClose;
-	private ToggleButton tbtnNotification;
+	private Switch sbtnNotification;
+	private ImageView ivIcon;
 	private TextView tvPattern;
 	private TextView tvStartTime;
 	private TextView tvEndTime;
@@ -53,12 +54,13 @@ public class PlanDetailActivity extends Activity
 	private int nDay;
 	private int nHour;
 	private int nMinute;
+	private boolean isUpdate = false;
 	
 	// code for got result
 	public static final int RESULT_CODE_CHOSEPATTERN = 111;
+	public static final int RESULT_CODE_CHOSEICON = 112;
 	
-	
-	
+
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -67,8 +69,10 @@ public class PlanDetailActivity extends Activity
 		setContentView(R.layout.activity_plan_detail);
 		
 		// get Views
+		btnExe = (Button) findViewById(R.id.edit_plan_btnAction);
+		ivIcon = (ImageView) findViewById(R.id.edit_plan_ivIcon);
 		ibtnClose = (ImageButton) findViewById(R.id.edit_plan_ibtnClose);
-		tbtnNotification = (ToggleButton) findViewById(R.id.edit_plan_tbtnNotification);
+		sbtnNotification = (Switch) findViewById(R.id.edit_plan_sbtnNotification);
 		tvPattern = (TextView) findViewById(R.id.edit_plan_tvPattern);
 		tvStartTime = (TextView) findViewById(R.id.edit_plan_tvStartTime);
 		tvEndTime = (TextView) findViewById(R.id.edit_plan_tvEndTime);
@@ -87,28 +91,42 @@ public class PlanDetailActivity extends Activity
 		
 		// get extra data
 		Intent i = getIntent();
-		try
-		{
-			day = (Day) i.getBundleExtra("data").
-								getSerializable("day");
-			plan = (Plan) i.getBundleExtra("data").
-								getSerializable("plan");
-		}
-		catch (Exception ex) {}
+		
+		day = (Day) i.getBundleExtra("data").
+							getSerializable("day");
+		plan = (Plan) i.getBundleExtra("data").
+							getSerializable("plan");
 
 		if(plan!=null)
 		{
 			// set value of Views
 			showValue(plan);
+			isUpdate = checkUpdate(plan);
 		}
-		else { Log.e("PlanDetail", "plan null"); }
-	
+		
+		
+		
+		btnExe.setOnClickListener(new OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				TblPlanTHelper helper = new TblPlanTHelper(
+									PlanDetailActivity.this);
+				try
+				{
+					helper.delete(plan.getId());
+					finish();
+				}
+				catch(Exception ex) {}
+			}
+		});
+		
 		
 		
 		// close activity and save plan
 		ibtnClose.setOnClickListener(new OnClickListener()
 		{
-			
 			@Override
 			public void onClick(View v)
 			{
@@ -125,17 +143,27 @@ public class PlanDetailActivity extends Activity
 				p.setStartTimeSetted(notification+"");
 				p.setNotification(notification+"");
 				
-				if(tvPattern.getText().toString().equals(""))
+				if(!isUpdate)
 				{
-					p.setPatternName(edtContent.getText().toString());
-					new TblPlanHelper(PlanDetailActivity.this).insert(p);
+					// add into PLAN
+					if(tvPattern.getText().toString().equals(""))
+					{
+						p.setPatternName(edtContent.getText().toString());
+						new TblPlanHelper(PlanDetailActivity.this).insert(p);
+					}
+					// add into PLAN_TRANSACTION
+					else
+					{
+						p.setDate(day.getY()+day.getM()+day.getD());
+						new TblPlanTHelper(PlanDetailActivity.this).insert(p);
+					}
 				}
 				else
-				{	
+				{
 					p.setDate(day.getY()+day.getM()+day.getD());
-					new TblPlanTHelper(PlanDetailActivity.this).insert(p);
+					new TblPlanTHelper(PlanDetailActivity.this).update(plan.getId(), p);
 				}
-				
+					
 				
 				finish();
 			}
@@ -143,12 +171,46 @@ public class PlanDetailActivity extends Activity
 		
 		
 		
-		// toggle button ON/OFF on change
+		// imageview Icon onClick
+		// chose icon
+		ivIcon.setOnClickListener(new OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				Intent i = new Intent(PlanDetailActivity.this,
+								ChoseIconActivity.class);
+				
+				startActivityForResult(i, RESULT_CODE_CHOSEICON);
+			}
+		});
+		
+		
+		
+		// TextView Pattern onClick
+		// chose pattern
+		tvPattern.setOnClickListener(new OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				// open new activity and
+				// get result
+				Intent i = new Intent(PlanDetailActivity.this, 
+								ChosePatternActivity.class);
+
+				startActivityForResult(i, 
+							RESULT_CODE_CHOSEPATTERN);
+			}
+		});
+		
+		
+		
+		// switch button ON/OFF on change
 		// set notification in app
-		tbtnNotification.setOnCheckedChangeListener(
+		sbtnNotification.setOnCheckedChangeListener(
 							new OnCheckedChangeListener()
 		{
-			
 			@Override
 			public void onCheckedChanged(
 					CompoundButton buttonView, boolean isChecked)
@@ -165,27 +227,7 @@ public class PlanDetailActivity extends Activity
 					tvNDate.setVisibility(View.INVISIBLE);
 					tvNTime.setVisibility(View.INVISIBLE);
 				}
-			}
-		});
-		
-		
-		
-		
-		
-		// TextView Pattern onClick
-		tvPattern.setOnClickListener(new OnClickListener()
-		{
-			
-			@Override
-			public void onClick(View v)
-			{
-				// open new activity and
-				// get result
-				Intent i = new Intent(PlanDetailActivity.this, 
-								ChosePatternActivity.class);
-
-				startActivityForResult(i, 
-							RESULT_CODE_CHOSEPATTERN);
+				
 			}
 		});
 	
@@ -195,14 +237,12 @@ public class PlanDetailActivity extends Activity
 		// TextView StartTime onClick
 		tvStartTime.setOnClickListener(new OnClickListener()
 		{
-			
 			@Override
 			public void onClick(View v)
 			{
 				// open timePicker dialog
 				OnTimeSetListener callback = new OnTimeSetListener()
 				{
-					
 					@Override
 					public void onTimeSet(TimePicker view, 
 									int hourOfDay, int minute)
@@ -222,7 +262,6 @@ public class PlanDetailActivity extends Activity
 					}
 				};
 				
-				
 				TimePickerDialog tpd = new TimePickerDialog(
 						PlanDetailActivity.this, callback, 0, 0, true);
 				
@@ -236,7 +275,6 @@ public class PlanDetailActivity extends Activity
 		// TextView EndTime onClick
 		tvEndTime.setOnClickListener(new OnClickListener()
 		{
-			
 			@Override
 			public void onClick(View v)
 			{
@@ -259,6 +297,7 @@ public class PlanDetailActivity extends Activity
 						
 						long milisec = c.getTimeInMillis();
 						tvEndTime.setTag(milisec);
+						
 					}
 				};
 				
@@ -276,14 +315,12 @@ public class PlanDetailActivity extends Activity
 		// TextView Notification Time onClick
 		tvNTime.setOnClickListener(new OnClickListener()
 		{
-			
 			@Override
 			public void onClick(View v)
 			{
 				// open timePicker dialog
 				OnTimeSetListener callback = new OnTimeSetListener()
 				{
-					
 					@Override
 					public void onTimeSet(TimePicker view, 
 									int hourOfDay, int minute)
@@ -292,6 +329,7 @@ public class PlanDetailActivity extends Activity
 						
 						nHour = hourOfDay;
 						nMinute = minute;
+						
 					}
 				};
 				
@@ -312,14 +350,12 @@ public class PlanDetailActivity extends Activity
 		// TextView notification Date onClick
 		tvNDate.setOnClickListener(new OnClickListener()
 		{
-			
 			@Override
 			public void onClick(View v)
 			{
 				// open timePicker dialog
 				OnDateSetListener callback = new OnDateSetListener()
 				{
-
 					@Override
 					public void onDateSet(DatePicker view, int year,
 							int monthOfYear, int dayOfMonth)
@@ -336,7 +372,6 @@ public class PlanDetailActivity extends Activity
 				};
 				
 				
-				
 				if(notification>0)
 				{
 					DatePickerDialog dpd = new DatePickerDialog(
@@ -351,14 +386,13 @@ public class PlanDetailActivity extends Activity
 		});
 		
 		
-		
-	}
+	} // end of onCreate()
 	
 
 
 
 	/**
-	 * Result from detail activity here
+	 * Result from chose pattern activity here
 	 */
 	@Override
 	protected void onActivityResult(int requestCode, 
@@ -367,19 +401,32 @@ public class PlanDetailActivity extends Activity
 		super.onActivityResult(requestCode, resultCode, data);
 		
 		// check result code
+		// if chose pattern
 		if(resultCode==RESULT_CODE_CHOSEPATTERN)
 		{
-			Bundle b = data.getBundleExtra("patternChosed");
-			Plan p = (Plan) b.getSerializable("patternChosed");
-			
-			showValue(p);
-			
+			Plan p = (Plan) data.getBundleExtra("data").
+							getSerializable("newPattern");
+			if(p!=null)
+				showValue(p);
 		}
+		// if chose icon
+		else if(resultCode==RESULT_CODE_CHOSEICON)
+		{
+			iconName = data.getBundleExtra(
+					"dataIcon").getString("icon");
+			
+			setIconImage();
+		}
+		
 	}
 	
-
 	
 	
+	
+	/**
+	 * 
+	 * @param p
+	 */
 	@SuppressLint("SimpleDateFormat")
 	private void showValue(Plan p)
 	{
@@ -422,7 +469,8 @@ public class PlanDetailActivity extends Activity
 			// notification date and time
 			if(Integer.parseInt(p.getNotification())>0)
 			{
-				tbtnNotification.setChecked(true);
+				sbtnNotification.setChecked(true);
+				notification = 1;
 				tvNDate.setVisibility(View.VISIBLE);
 				tvNTime.setVisibility(View.VISIBLE);
 			}
@@ -432,11 +480,66 @@ public class PlanDetailActivity extends Activity
 				tvNTime.setVisibility(View.INVISIBLE);
 			}
 			
+			
+			// show or hide delete button
+			if(p.getId().equals(""))
+			{
+				btnExe.setVisibility(View.INVISIBLE);
+				//isUpdate = false;
+			}
+			else
+			{
+				btnExe.setVisibility(View.VISIBLE);
+				//isUpdate = true;
+			}
+			
 			tvPattern.setText(p.getPatternName());
 			edtTitle.setText(p.getTitle());
 			edtContent.setText(p.getContent());
+			
+			iconName = p.getIcon();
+			setIconImage();
+			
 		}
 		catch (Exception ex) {}
 	}
 	
+	
+	private boolean checkUpdate(Plan p)
+	{
+		try
+		{
+			if(p.getId().equals(""))
+				return false;
+			else
+				return true;
+		}
+		catch(Exception ex) {return false;}
+	}
+	
+	
+	
+	private void setIconImage()
+	{
+		if(iconName.equals("pic1"))
+			ivIcon.setImageResource(R.drawable.pic1);
+		else if(iconName.equals("pic2"))
+			ivIcon.setImageResource(R.drawable.pic2);
+		else if(iconName.equals("pic3"))
+			ivIcon.setImageResource(R.drawable.pic3);
+		else if(iconName.equals("pic4"))
+			ivIcon.setImageResource(R.drawable.pic4);
+		else if(iconName.equals("pic5"))
+			ivIcon.setImageResource(R.drawable.pic5);
+		else if(iconName.equals("pic7"))
+			ivIcon.setImageResource(R.drawable.pic7);
+		else if(iconName.equals("pic8"))
+			ivIcon.setImageResource(R.drawable.pic8);
+		else if(iconName.equals("pic9"))
+			ivIcon.setImageResource(R.drawable.pic9);
+		else if(iconName.equals("pic10"))
+			ivIcon.setImageResource(R.drawable.pic10);
+		else if(iconName.equals("pic11"))
+			ivIcon.setImageResource(R.drawable.pic11);
+	}
 }

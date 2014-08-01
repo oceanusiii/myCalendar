@@ -15,7 +15,7 @@
         android:weightSum="10" >
 
         <TextView
-            android:id="@+id/edit_plan_tvHead"
+            android:id="@+id/edit_shift_tvHead"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="8"
@@ -25,18 +25,22 @@
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <ImageButton
-            android:id="@+id/edit_plan_ibtnClose"
+            android:id="@+id/edit_shift_ibtnClose"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:src="@android:drawable/ic_delete" />
 
     </LinearLayout>
+	
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="90" >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="90"
+        android:layout_height="wrap_content"
         android:background="#919191"
         android:weightSum="100"
         android:orientation="vertical" >
@@ -61,10 +65,10 @@
                 android:layout_weight="1"
                 android:textColor="#ffffff"
                 android:layout_marginLeft="10dp"
-                android:text="Pattern: " />
+                android:text="Shift: " />
 
             <Spinner
-                android:id="@+id/spinner1"
+                android:id="@+id/edit_shift_spnShift"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#ffffff"
@@ -101,10 +105,10 @@
                 	android:layout_weight="1"
                 	android:textColor="#ffffff"
                 	android:layout_marginLeft="10dp"
-                    android:text="Title: " />
+                    android:text="Content: " />
 
                 <EditText
-                    android:id="@+id/edit_plan_edtTitle"
+                    android:id="@+id/edit_shift_edtContent"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                 	android:layout_weight="1"
@@ -113,56 +117,6 @@
 
                     <requestFocus />
                 </EditText>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:weightSum="2"
-                android:orientation="horizontal"
-                android:layout_weight="1" >
-
-                <TextView
-                    android:id="@+id/textView4"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                	android:textColor="#ffffff"
-                	android:layout_marginLeft="10dp"
-                    android:layout_weight="1"
-                    android:text="Content: " />
-
-                <EditText
-                    android:id="@+id/edit_plan_edtContent"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                	android:textColor="#ffffff"
-                    android:layout_weight="1"
-                    android:ems="10" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:weightSum="2"
-                android:layout_weight="1" >
-
-                <TextView
-                    android:id="@+id/textView5"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                	android:textColor="#ffffff"
-                	android:layout_marginLeft="10dp"
-                    android:layout_weight="1"
-                    android:text="Icon: " />
-
-                <ImageButton
-                    android:id="@+id/edit_plan_ibtnIcon"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:src="@drawable/mothlycalendar_calendar_icon" />
 
             </LinearLayout>
 
@@ -182,7 +136,7 @@
                     android:text="Start time: " />
 
                 <TextView
-                    android:id="@+id/edit_plan_tvStartTime"
+                    android:id="@+id/edit_shift_tvStartTime"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                 	android:textColor="#ffffff"
@@ -208,7 +162,7 @@
                     android:text="End time: " />
 
                 <TextView
-                    android:id="@+id/edit_plan_tvEndTime"
+                    android:id="@+id/edit_shift_tvEndTime"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                 	android:textColor="#ffffff"
@@ -249,13 +203,12 @@
                     android:layout_weight="1"
                     android:text="Notification: " />
 
-                <ToggleButton
-                    android:id="@+id/edit_plan_tbtnNotification"
+                <Switch
+                    android:id="@+id/edit_shift_sbtnNotification"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:textOn="ON"
-                    android:textOff="OFF"
-                    android:layout_weight="1" />
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="" />
 
             </LinearLayout>
 
@@ -275,7 +228,7 @@
                     android:text="Date: " />
 
                 <TextView
-                    android:id="@+id/edit_plan_tvNDate"
+                    android:id="@+id/edit_shift_tvNDate"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                 	android:textColor="#ffffff"
@@ -301,7 +254,7 @@
                     android:text="Time: " />
 
                 <TextView
-                    android:id="@+id/edit_plan_tvNTime"
+                    android:id="@+id/edit_shift_tvNTime"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                 	android:textColor="#ffffff"
@@ -323,13 +276,74 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:orientation="vertical"
             android:layout_weight="10" >
 
-            <Button
-                android:id="@+id/edit_plan_btnAction"
+            <TextView
+                android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="CREATE" />
+                android:text="TextView" />
+
+            <ImageView
+                android:id="@+id/imageView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/pic11" />
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/pic1" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/pic2" />
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/pic3" />
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/pic4" />
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/pic5" />
+
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/pic7" />
+
+            <ImageView
+                android:id="@+id/imageView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/pic8" />
+
+            <ImageView
+                android:id="@+id/imageView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/pic9" />
+
+            <ImageView
+                android:id="@+id/imageView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/pic10" />
 
         </LinearLayout>
 
@@ -341,5 +355,6 @@
         </LinearLayout>
 
     </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

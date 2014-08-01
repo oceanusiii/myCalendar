@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+
 public class DBConfig extends SQLiteOpenHelper
 {
 
@@ -57,7 +58,7 @@ public class DBConfig extends SQLiteOpenHelper
 	public static final String CL_VIEW_ORDER_S			= "VIEW_ORDER";
 	
 	
-	// table tblShift
+	// table tblShift_stransaction
 	// table_name
 	public static final String TB_SHIFT_T		 		= "SHIFT_TRANSACTION";
 	// column_name
@@ -72,6 +73,33 @@ public class DBConfig extends SQLiteOpenHelper
 	public static final String CL_IS_ALLDAY_ST	 		= "IS_ALLDAY";
 	public static final String CL_NOTIFICATION_ST		= "NOTIFICATION";
 	public static final String CL_DATE_ST		  		= "DATE";
+	
+	
+	// table tblMember
+	// table_name
+	public static final String TB_MEMBER		= "MEMBER";
+	// column_name
+	public static final String CL_ID_M			= "_id";
+	public static final String CL_NAME_M 		= "NAME";
+	public static final String CL_ON_OFF_M		= "ON_OFF";
+	
+	
+	// table tblShift_and_member
+	// table_name
+	public static final String TB_SHIFT_AND_MEMBER		= "SHIFT_AND_MEMBER";
+	// column_name
+	public static final String CL_ID_SM				= "_id";
+	public static final String CL_SHIFT_ID_SM 			= "SHIFT_ID";
+	public static final String CL_MEMBER_ID_SM			= "MEMBER_ID";
+	
+	
+	// table tblShiftTransaction_and_menber
+	// table_name
+	public static final String TB_SHIFTTRANSACTION_AND_MEMBER	= "SHIFT_TRANSACTION_AND_MEMBER";
+	// column_name
+	public static final String CL_ID_STM						= "_id";
+	public static final String CL_SHIFTTRANSACTION_ID_STM 		= "SHIFTTRANSACTION_ID";
+	public static final String CL_MEMBER_ID_STM				= "MEMBER_ID";
 	
 	
 	public DBConfig(Context context)
@@ -155,6 +183,35 @@ public class DBConfig extends SQLiteOpenHelper
 		db.execSQL(shiftT_create);
 		
 		
+		// create table MEMBER
+		String member_create = 	"create table " + 
+				TB_MEMBER + "( " 
+				+ CL_ID_M + 	" integer primary key autoincrement, "
+				+ CL_NAME_M + 	" text not null, "
+				+ CL_ON_OFF_M + " integer not null"
+				+ ");" ;
+		db.execSQL(member_create);
+		
+		
+		// create table MEMBER
+		String shift_member_create = 	"create table " + 
+				TB_SHIFT_AND_MEMBER + "( " 
+				+ CL_ID_SM + 			" integer primary key autoincrement, "
+				+ CL_SHIFT_ID_SM + 		" integer not null, "
+				+ CL_MEMBER_ID_SM + 	" integer not null"
+				+ ");" ;
+		db.execSQL(shift_member_create);
+		
+		
+		
+		// create table SHIFTTRANSACTION_MEMBER
+		String shiftT_member_create = 	"create table " + 
+				TB_SHIFTTRANSACTION_AND_MEMBER + "( " 
+				+ CL_ID_STM + 					" integer primary key autoincrement, "
+				+ CL_SHIFTTRANSACTION_ID_STM + 	" integer not null, "
+				+ CL_MEMBER_ID_STM + 			" integer not null"
+				+ ");" ;
+		db.execSQL(shiftT_member_create);
 		
 	}
 	
@@ -168,6 +225,9 @@ public class DBConfig extends SQLiteOpenHelper
 		db.execSQL("drop if table exists " + TB_PLAN_T);
 		db.execSQL("drop if table exists " + TB_SHIFT);
 		db.execSQL("drop if table exists " + TB_SHIFT_T);
+		db.execSQL("drop if table exists " + TB_MEMBER);
+		db.execSQL("drop if table exists " + TB_SHIFT_AND_MEMBER);
+		db.execSQL("drop if table exists " + TB_SHIFTTRANSACTION_AND_MEMBER);
 		
 		onCreate(db);
 	}

@@ -54,7 +54,7 @@ public class TblShiftHelper extends DBConfig
 		cv.put(DBConfig.CL_ENDTIME_S, s.getEndTime());
 		cv.put(DBConfig.CL_NOTIFICATION_TIME_S, s.getNotificationTime());
 		cv.put(DBConfig.CL_NAME_S, s.getName());
-		cv.put(DBConfig.CL_COLOR_TEXT_S, s.getColorPattern());
+		cv.put(DBConfig.CL_COLOR_TEXT_S, s.getColorText());
 		cv.put(DBConfig.CL_COLOR_PATTERN_S, s.getColorPattern());
 		cv.put(DBConfig.CL_CONTENT_S, s.getContent());
 		cv.put(DBConfig.CL_IS_ALLDAY_S, s.getIsAllDay());

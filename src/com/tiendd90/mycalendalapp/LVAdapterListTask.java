@@ -4,9 +4,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,6 +66,7 @@ public class LVAdapterListTask extends BaseAdapter
 	
 	
 	
+	@SuppressLint("SimpleDateFormat")
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent)
 	{
@@ -115,6 +116,7 @@ public class LVAdapterListTask extends BaseAdapter
 			holder.tvTime.setText(startTime + "~" + endTime);
 			holder.tvTitle.setText(p.getTitle());
 			holder.tvContent.setText(p.getContent());
+			//holder.tvContent.setText(p.getDate());
 		}
 		
 		
