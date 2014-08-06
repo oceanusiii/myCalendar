@@ -26,6 +26,7 @@ public class Fragmenttwo extends Fragment {
 			data.add(""+i);
 		}
 		View v = inflater.inflate(R.layout.layout_fragment2,container, false);
+		
 		adapter = new CustomAdapter(getActivity(), R.layout.item_father,data);
 		lv =(ListView) v.findViewById(R.id.listView);
 		lv.setAdapter(adapter);

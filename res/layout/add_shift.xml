@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ff978f87"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.5"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="today" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="6"
+            android:gravity="center" >
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:src="@drawable/mothlycalendar_arrow_left_blue" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="6"
+                android:gravity="center"
+                android:text="20014.7" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:src="@drawable/mothlycalendar_arrow_right_blue" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/back"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="today" />
+    </LinearLayout>
+
+    <CalendarView
+        android:id="@+id/cv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="6" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:weightSum="8"
+            android:background="#2f4f4f"
+            android:gravity="center" >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:gravity="center"
+                android:text="7.27(sum)" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="TEXT" />
+
+            <TextView
+                android:id="@+id/view_shift"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="view Shift" />
+            
+            <ImageView
+	            android:id="@+id/back_fragment_one"
+	            android:layout_width="0dp"
+	            android:layout_weight="1"
+	            android:layout_height="match_parent"
+	            android:layout_alignParentRight="true"
+	            android:src="@drawable/monthycalendar_cancel_icon" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_height="0dp"
+                android:layout_width="match_parent"
+                android:layout_weight="1">
+                <Button
+                    android:id="@+id/shift_1"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:background="#FF8D42"
+                    android:text="Shift 1"
+                    />
+                <Button
+                    android:layout_marginLeft="2dp"
+                    android:id="@+id/shift_2"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:background="#4978D2"
+                    android:text="Shift 2"
+                    />
+                <Button
+                    android:id="@+id/shift_3"
+                    android:layout_marginLeft="2dp"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:background="#DECDEE"
+                    android:text="Shift 3"
+                    />
+                <Button
+                    android:id="@+id/shift_4"
+                    android:layout_marginLeft="2dp"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:background="#FE3164"
+                    android:text="Shift 4"
+                    />
+                <Button
+                    android:id="@+id/shift_5"
+                    android:layout_marginLeft="2dp"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:background="#A5C87A"
+                    android:text="Shift 5"
+                    />
+                <Button
+                    android:id="@+id/shift_6"
+                    android:layout_marginLeft="2dp"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:background="#369B69"
+                    android:text="Shift 6"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_height="0dp"
+                android:layout_width="match_parent"
+                android:layout_marginTop="2dp"
+                android:layout_weight="1">
+                <Button
+                    android:id="@+id/shift_7"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:background="#11A8D4"
+                    android:text="Shift 7"
+                    />
+                <Button
+                    android:layout_marginLeft="2dp"
+                    android:id="@+id/shift_8"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:background="#020266"
+                    android:text="Shift 8"
+                    />
+                <Button
+                    android:id="@+id/shift_9"
+                    android:layout_marginLeft="2dp"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:background="#F0B8AB"
+                    android:text="Shift 9"
+                    />
+                <Button
+                    android:id="@+id/shift_10"
+                    android:layout_marginLeft="2dp"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:background="#DDDDDD"
+                    android:text="Shift 10"
+                    />
+                <Button
+                    android:id="@+id/shift_11"
+                    android:layout_marginLeft="2dp"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:background="#536366"
+                    android:text="Shift 11"
+                    />
+                <Button
+                    android:id="@+id/shift_12"
+                    android:layout_marginLeft="2dp"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:background="#7D8D42"
+                    android:text="Shift 12"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_height="0dp"
+                android:layout_width="match_parent"
+                android:layout_marginTop="2dp"
+                android:layout_weight="2">
+                
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
