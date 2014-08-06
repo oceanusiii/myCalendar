@@ -5,11 +5,13 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="14"
+        android:minSdkVersion="19"
         android:targetSdkVersion="19" />
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -42,6 +44,13 @@
             android:name=".ChoseIconActivity"
             android:label="@string/app_name" android:theme="@android:style/Theme.DeviceDefault.Dialog">
         </activity>
+        
+        <receiver android:name=".NotifyReceiver" >
+            <intent-filter>
+                <action android:name="SomeAction" />
+            </intent-filter>
+        </receiver>
+        
     </application>
 
 </manifest>

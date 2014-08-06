@@ -61,7 +61,7 @@ public class TblShiftTHelper extends DBConfig
 		cv.put(DBConfig.CL_CONTENT_ST, s.getContent());
 		cv.put(DBConfig.CL_IS_ALLDAY_ST, s.getIsAllDay());
 		cv.put(DBConfig.CL_NOTIFICATION_ST, s.getNotification());
-		cv.put(DBConfig.CL_DATE_ST, s.getViewOrder());
+		cv.put(DBConfig.CL_DATE_ST, s.getDate());
 		
 		return db.insert(DBConfig.TB_SHIFT_T, null, cv);
 	}
@@ -84,7 +84,7 @@ public class TblShiftTHelper extends DBConfig
 		cv.put(DBConfig.CL_CONTENT_ST, s.getContent());
 		cv.put(DBConfig.CL_IS_ALLDAY_ST, s.getIsAllDay());
 		cv.put(DBConfig.CL_NOTIFICATION_ST, s.getNotification());
-		cv.put(DBConfig.CL_DATE_ST, s.getViewOrder());
+		cv.put(DBConfig.CL_DATE_ST, s.getDate());
 		
 		return db.update(DBConfig.TB_SHIFT_T,
 				cv, DBConfig.CL_ID_ST + " =? ",
@@ -169,7 +169,7 @@ public class TblShiftTHelper extends DBConfig
 	
 	
 	/**
-	 * Get all shift by _id
+	 * Get all shift by DATE
 	 */
 	public ArrayList<Shift> getByDate(String date)
 	{

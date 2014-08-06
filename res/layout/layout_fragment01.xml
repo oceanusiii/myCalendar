@@ -134,12 +134,20 @@
 
             </LinearLayout>
 
-            <ListView
-                android:id="@+id/fragment01_lvPlan"
+            <LinearLayout
+                android:id="@+id/fragment01_layoutHolder"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="8" >
-            </ListView>
+                android:layout_weight="8"
+                android:orientation="vertical" >
+
+                <ListView
+                    android:id="@+id/fragment01_lvPlan"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+                </ListView>
+
+            </LinearLayout>
 
         </LinearLayout>
 

@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.tiendd90.model.CTask;
 import com.tiendd90.model.Plan;
+import com.tiendd90.model.Shift;
 
 
 public class LVAdapterListTask extends BaseAdapter
@@ -23,7 +24,6 @@ public class LVAdapterListTask extends BaseAdapter
 	private LayoutInflater inflater;
 	private int resource;
 	private ViewHolder holder;
-	
 	
 	
 	public LVAdapterListTask(Activity context, 
@@ -36,8 +36,6 @@ public class LVAdapterListTask extends BaseAdapter
 						Context.LAYOUT_INFLATER_SERVICE);
 	}
 	
-	
-	
 
 	@Override
 	public int getCount()
@@ -46,15 +44,11 @@ public class LVAdapterListTask extends BaseAdapter
 	}
 
 	
-	
-	
 	@Override
 	public Object getItem(int position)
 	{
 		return data.get(position);
 	}
-
-	
 	
 	
 	@Override
@@ -64,13 +58,10 @@ public class LVAdapterListTask extends BaseAdapter
 	}
 
 	
-	
-	
 	@SuppressLint("SimpleDateFormat")
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent)
 	{
-
 		View v = convertView;
 		
 		if(convertView==null)
@@ -99,24 +90,45 @@ public class LVAdapterListTask extends BaseAdapter
 			holder = (ViewHolder) v.getTag();
 		}
 		
-		
 		CTask t = data.get(position);
-		
 		
 		if(t.getType().equals("Plan"))
 		{
-			Plan p = (Plan) t;
-			Calendar c = Calendar.getInstance();
-			java.text.DateFormat format = new SimpleDateFormat("HH:mm");
-			c.setTimeInMillis(Long.parseLong(p.getStartTime()));
-			String startTime = format.format(c.getTime());
-			c.setTimeInMillis(Long.parseLong(p.getEndTime()));
-			String endTime = format.format(c.getTime());
-			// show data
-			holder.tvTime.setText(startTime + "~" + endTime);
-			holder.tvTitle.setText(p.getTitle());
-			holder.tvContent.setText(p.getContent());
-			//holder.tvContent.setText(p.getDate());
+			try
+			{
+				Plan p = (Plan) t;
+				Calendar c = Calendar.getInstance();
+				java.text.DateFormat format = new SimpleDateFormat("HH:mm");
+				c.setTimeInMillis(Long.parseLong(p.getStartTime()));
+				String startTime = format.format(c.getTime());
+				c.setTimeInMillis(Long.parseLong(p.getEndTime()));
+				String endTime = format.format(c.getTime());
+				// show data
+				holder.tvTime.setText(startTime + "~" + endTime);
+				holder.tvTitle.setText(p.getTitle());
+				holder.tvContent.setText(p.getContent());
+			}
+			catch(Exception ex) {}
+			
+		}
+		else if(t.getType().equals("Shift"))
+		{
+			try
+			{
+				Shift s = (Shift) t;
+				Calendar c = Calendar.getInstance();
+				java.text.DateFormat format = new SimpleDateFormat("HH:mm");
+				c.setTimeInMillis(Long.parseLong(s.getStartTime()));
+				String startTime = format.format(c.getTime());
+				c.setTimeInMillis(Long.parseLong(s.getEndTime()));
+				String endTime = format.format(c.getTime());
+				// show data
+				holder.tvTime.setText(startTime + "~" + endTime);
+				holder.tvTitle.setText(s.getName());
+				holder.tvContent.setText(s.getContent());
+			}
+			catch(Exception ex) {}
+			
 		}
 		
 		
@@ -130,6 +142,12 @@ public class LVAdapterListTask extends BaseAdapter
 	}
 	
 	
+	
+	/**
+	 * 
+	 * @author FDM17
+	 *
+	 */
 	class ViewHolder
 	{
 		TextView tvTime;

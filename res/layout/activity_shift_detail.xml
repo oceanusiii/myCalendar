@@ -283,67 +283,99 @@
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="Member"
+                android:textColor="#ffffff" />
 
-            <ImageView
-                android:id="@+id/imageView10"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/pic11" />
+                android:weightSum="5" >
 
-            <ImageView
-                android:id="@+id/imageView1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/pic1" />
+                <ImageView
+                    android:id="@+id/shift_detail_ivMember1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="memberSelect"
+                    android:src="@drawable/memoff" />
 
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/pic2" />
+                <ImageView
+                    android:id="@+id/shift_detail_ivMember2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="memberSelect"
+                    android:src="@drawable/memoff" />
 
-            <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/pic3" />
+                <ImageView
+                    android:id="@+id/shift_detail_ivMember3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="memberSelect"
+                    android:src="@drawable/memoff" />
 
-            <ImageView
-                android:id="@+id/imageView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/pic4" />
+                <ImageView
+                    android:id="@+id/shift_detail_ivMember4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="memberSelect"
+                    android:src="@drawable/memoff" />
 
-            <ImageView
-                android:id="@+id/imageView5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/pic5" />
+                <ImageView
+                    android:id="@+id/shift_detail_ivMember5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="memberSelect"
+                    android:src="@drawable/memoff" />
+            </LinearLayout>
 
-            <ImageView
-                android:id="@+id/imageView6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/pic7" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
 
-            <ImageView
-                android:id="@+id/imageView7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/pic8" />
+                <ImageView
+                    android:id="@+id/shift_detail_ivMember6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="memberSelect"
+                    android:src="@drawable/memoff" />
 
-            <ImageView
-                android:id="@+id/imageView8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/pic9" />
+                <ImageView
+                    android:id="@+id/shift_detail_ivMember7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="memberSelect"
+                    android:src="@drawable/memoff" />
 
-            <ImageView
-                android:id="@+id/imageView9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/pic10" />
+                <ImageView
+                    android:id="@+id/shift_detail_ivMember8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="memberSelect"
+                    android:src="@drawable/memoff" />
+
+                <ImageView
+                    android:id="@+id/shift_detail_ivMember9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="memberSelect"
+                    android:src="@drawable/memoff" />
+
+                <ImageView
+                    android:id="@+id/shift_detail_ivMember10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="memberSelect"
+                    android:src="@drawable/memoff" />
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -352,6 +384,20 @@
             android:layout_height="0dp"
             android:background="#818181"
             android:layout_weight="5" >
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <Button
+                android:id="@+id/edit_shift_ibtnDelete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#BC1F1D"
+                android:text="DELETE" />
+
         </LinearLayout>
 
     </LinearLayout>

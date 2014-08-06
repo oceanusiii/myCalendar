@@ -14,6 +14,8 @@ public class TblShiftTAndMemberHelper extends DBConfig
 	
 	private SQLiteDatabase db;
 
+	
+	
 	public TblShiftTAndMemberHelper(Context context)
 	{
 		super(context);
@@ -44,8 +46,8 @@ public class TblShiftTAndMemberHelper extends DBConfig
 	{
 		ContentValues cv = new ContentValues();
 		
-		cv.put(DBConfig.CL_SHIFT_ID_SM, sm.getShiftId());
-		cv.put(DBConfig.CL_MEMBER_ID_SM, sm.getMemberId());
+		cv.put(DBConfig.CL_SHIFTTRANSACTION_ID_STM, sm.getShiftId());
+		cv.put(DBConfig.CL_MEMBER_ID_STM, sm.getMemberId());
 		
 		return db.insert(
 				DBConfig.TB_SHIFTTRANSACTION_AND_MEMBER, null, cv);
@@ -59,8 +61,8 @@ public class TblShiftTAndMemberHelper extends DBConfig
 	{
 		ContentValues cv = new ContentValues();
 		
-		cv.put(DBConfig.CL_SHIFT_ID_SM, sm.getShiftId());
-		cv.put(DBConfig.CL_MEMBER_ID_SM, sm.getMemberId());
+		cv.put(DBConfig.CL_SHIFTTRANSACTION_ID_STM, sm.getShiftId());
+		cv.put(DBConfig.CL_MEMBER_ID_STM, sm.getMemberId());
 		
 		return db.update(
 				DBConfig.TB_SHIFTTRANSACTION_AND_MEMBER,
@@ -76,7 +78,7 @@ public class TblShiftTAndMemberHelper extends DBConfig
 	{
 		return db.delete(
 				DBConfig.TB_SHIFTTRANSACTION_AND_MEMBER,
-				DBConfig.CL_ID_SM + " =? ",
+				DBConfig.CL_ID_STM + " =? ",
 				new String[] {_id} );
 	}
 	
@@ -123,19 +125,18 @@ public class TblShiftTAndMemberHelper extends DBConfig
 		return result;
 	}
 	
-
 	
 	/**
-	 * Get all plan by _id
+	 * 
+	 * @return
 	 */
-	public ArrayList<ShiftMember> getByID(String _id)
+	public ArrayList<ShiftMember> getByShiftID(String sID)
 	{
-		
 		ArrayList<ShiftMember> result = new ArrayList<ShiftMember>();
 		
 		String sql = "select * from " + DBConfig.TB_SHIFTTRANSACTION_AND_MEMBER 
-						+ " where " + DBConfig.CL_ID_SM + " =? ";
-		Cursor c = db.rawQuery(sql, new String[] { _id });
+				+ " where " + DBConfig.CL_SHIFTTRANSACTION_ID_STM + " =? ";
+		Cursor c = db.rawQuery(sql, new String[] { sID });
 		
 		if(c.moveToFirst())
 		{
@@ -155,6 +156,62 @@ public class TblShiftTAndMemberHelper extends DBConfig
 		
 		c.close();
 		return result;
+	}
+	
+
+	
+	/**
+	 * Get ShiftMember by _id
+	 */
+	public ShiftMember getByID(String _id)
+	{
+		String sql = "select * from " + DBConfig.TB_SHIFTTRANSACTION_AND_MEMBER 
+						+ " where " + DBConfig.CL_ID_STM + " =? ";
+		Cursor c = db.rawQuery(sql, new String[] { _id });
+		
+		if(c.moveToFirst())
+		{
+			ShiftMember sm = new ShiftMember();
+			// set
+			sm.setId(c.getString(0));
+			sm.setShiftId(c.getString(1));
+			sm.setMemberId(c.getString(2));
+			
+			c.close();
+			return sm;
+		}
+		
+		c.close();
+		return null;
+	}
+	
+	
+	
+	
+	/**
+	 * Get ShiftMember by _id
+	 */
+	public ShiftMember getByShiftIDAndMemberID(String sId, String mID)
+	{
+		String sql = "select * from " + DBConfig.TB_SHIFTTRANSACTION_AND_MEMBER 
+						+ " where " + DBConfig.CL_SHIFTTRANSACTION_ID_STM + " =? and " 
+						+ DBConfig.CL_MEMBER_ID_STM + " =? ";
+		Cursor c = db.rawQuery(sql, new String[] { sId, mID });
+		
+		if(c.moveToFirst())
+		{
+			ShiftMember sm = new ShiftMember();
+			// set
+			sm.setId(c.getString(0));
+			sm.setShiftId(c.getString(1));
+			sm.setMemberId(c.getString(2));
+			
+			c.close();
+			return sm;
+		}
+		
+		c.close();
+		return null;
 	}
 	
 	

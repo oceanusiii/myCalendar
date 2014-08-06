@@ -2,7 +2,6 @@ package com.tiendd90.dataprovider;
 
 import java.util.ArrayList;
 
-import com.tiendd90.model.Member;
 import com.tiendd90.model.ShiftMember;
 
 import android.content.ContentValues;
